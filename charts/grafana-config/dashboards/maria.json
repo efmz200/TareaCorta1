@@ -1,0 +1,3929 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_ELASTICSEARCH",
+      "label": "Elasticsearch",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "elasticsearch",
+      "pluginName": "Elasticsearch"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "version": "1.0.0"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.5.11"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "piechart",
+      "name": "Pie chart v2",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "MariaDB dashboard using ElasticSearch, metricbeat with mysql and sql (sql_response_format=table) modules.",
+  "editable": true,
+  "gnetId": 15746,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1644931202850,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 36,
+      "panels": [],
+      "title": "MariaDB",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 30
+              },
+              {
+                "color": "green",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.11",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:546",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "$$hashKey": "object:544",
+              "field": "sql.metrics.numeric.value",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname and sql.metrics.string.variable_name: 'Uptime'\r and fields.mariadb.env: $env",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.11",
+      "targets": [
+        {
+          "alias": "Cached",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:816",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:814",
+              "field": "mysql.status.threads.cached",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "A",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Connected",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:820",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "$$hashKey": "object:818",
+              "field": "mysql.status.threads.connected",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "B",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Created",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:824",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:822",
+              "field": "mysql.status.threads.created",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "C",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Running",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:828",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:826",
+              "field": "mysql.status.threads.running",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "D",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Open Sessions",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 8,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.11",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Cached",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:759",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:757",
+              "field": "mysql.status.threads.cached",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "A",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Connected",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:763",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:761",
+              "field": "mysql.status.threads.connected",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "B",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Created",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:767",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:765",
+              "field": "mysql.status.threads.created",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "C",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Running",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:771",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "$$hashKey": "object:769",
+              "field": "mysql.status.threads.running",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "D",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Active Sessions",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:344",
+          "decimals": 0,
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:345",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 33,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "values": []
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {}
+      },
+      "pluginVersion": "7.5.11",
+      "targets": [
+        {
+          "alias": "Cached",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:91",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "$$hashKey": "object:89",
+              "field": "mysql.status.threads.cached",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "A",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Connected",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:95",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:93",
+              "field": "mysql.status.threads.connected",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "B",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Created",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:99",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "$$hashKey": "object:97",
+              "field": "mysql.status.threads.created",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "C",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "Running",
+          "bucketAggs": [
+            {
+              "$$hashKey": "object:103",
+              "field": "@timestamp",
+              "id": "1",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "$$hashKey": "object:101",
+              "field": "mysql.status.threads.running",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "fields.mariadb.alias: $hostname",
+          "refId": "D",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Threads",
+      "type": "piechart"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 27,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "decimals": 0,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 10,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 50,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:1490",
+                  "fake": true,
+                  "field": "sql.metrics.string.command",
+                  "id": "5",
+                  "settings": {
+                    "min_doc_count": 0,
+                    "order": "desc",
+                    "orderBy": "_count",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "$$hashKey": "object:147",
+                  "field": "sql.metrics.string.state",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "0",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "$$hashKey": "object:148",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "30s",
+                    "min_doc_count": "0",
+                    "offset": "10s",
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:145",
+                  "field": "select field",
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname  AND sql.metrics.string.db: $database AND NOT sql.metrics.string.command: Sleep",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:147",
+                  "field": "sql.metrics.string.state",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "0",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "$$hashKey": "object:148",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "30s",
+                    "min_doc_count": "0",
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:145",
+                  "field": "select field",
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname AND sql.metrics.string.user: /[a-z]*/ AND sql.metrics.string.db: $database AND NOT sql.metrics.string.command: Sleep",
+              "refId": "B",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Database time (command|state)",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transformations": [],
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:748",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:749",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Database time",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 0,
+            "y": 9
+          },
+          "hiddenSeries": false,
+          "id": 18,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "Delete",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:406",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:402",
+                  "field": "mysql.status.command.delete",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:403",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Insert",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:412",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:408",
+                  "field": "mysql.status.command.insert",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:409",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Select",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:418",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:414",
+                  "field": "mysql.status.command.select",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:415",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "C",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Update",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:424",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:420",
+                  "field": "mysql.status.command.update",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:421",
+                  "id": "2",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "D",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Commands",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 7,
+            "y": 9
+          },
+          "id": 19,
+          "options": {
+            "displayLabels": [],
+            "legend": {
+              "displayMode": "list",
+              "placement": "right",
+              "values": []
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {}
+          },
+          "pluginVersion": "7.5.11",
+          "targets": [
+            {
+              "alias": "Hits",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:270",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "10m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:268",
+                  "field": "mysql.status.cache.table.open_cache.hits",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Misses",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:274",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "10m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:272",
+                  "field": "mysql.status.cache.table.open_cache.misses",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Overflows",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:278",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "10m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:276",
+                  "field": "mysql.status.cache.table.open_cache.overflows",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "C",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Hits/min",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:146",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:144",
+                  "field": "mysql.status.cache.table.open_cache.hits",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "max"
+                },
+                {
+                  "$$hashKey": "object:162",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "D",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Misses/min",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:146",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:144",
+                  "field": "mysql.status.cache.table.open_cache.misses",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "max"
+                },
+                {
+                  "$$hashKey": "object:162",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "E",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Cache Overflow/min",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:146",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:144",
+                  "field": "mysql.status.cache.table.op",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "max"
+                },
+                {
+                  "$$hashKey": "object:162",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "F",
+              "timeField": "@timestamp"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Cache",
+          "type": "piechart"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 10,
+            "x": 14,
+            "y": 9
+          },
+          "id": 20,
+          "options": {
+            "displayLabels": [],
+            "legend": {
+              "displayMode": "list",
+              "placement": "right",
+              "values": []
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {}
+          },
+          "pluginVersion": "7.5.11",
+          "targets": [
+            {
+              "alias": "cache disk_use",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "10m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "mysql.status.binlog.cache.disk_use",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "cache use",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "10m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.binlog.cache.use",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Binlog",
+          "type": "piechart"
+        }
+      ],
+      "title": "Database usage and cache",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 7,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 9,
+            "x": 0,
+            "y": 10
+          },
+          "hiddenSeries": false,
+          "id": 2,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "Bytes Sent",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "30s",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.bytes.sent",
+                  "hide": true,
+                  "id": "1",
+                  "type": "max"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Bytes Received",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "30s",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.bytes.received",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Bytes Send/Received",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 5,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 9,
+            "y": 10
+          },
+          "hiddenSeries": false,
+          "id": 15,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "accept",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "mysql.status.connection.errors.accept",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "internal",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.connection.errors.internal",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "max",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.connection.errors.max",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "C",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "peer_address",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.connection.errors.peer_address",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "D",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "select",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.connection.errors.select",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "E",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "tcpwrap",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.connection.errors.tcpwrap",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "F",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Connection Errors",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:344",
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:345",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 5,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 17,
+            "y": 10
+          },
+          "hiddenSeries": false,
+          "id": 21,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "Clients",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "mysql.status.aborted.clients",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Connects",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.aborted.connects",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Aborted Connections",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:344",
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:345",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Network and Connections",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byType",
+                  "options": "number"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "decbytes"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 4,
+            "x": 0,
+            "y": 11
+          },
+          "id": 38,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.11",
+          "targets": [
+            {
+              "alias": "Data",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "mysql.status.innodb.buffer_pool.bytes.data",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Dirty",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "field": "mysql.status.innodb.buffer_pool.bytes.dirty",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "InnoDB.BufferPool Data",
+          "type": "stat"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byType",
+                  "options": "number"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "none"
+                  }
+                ]
+              }
+            ]
+          },
+          "fill": 10,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 5,
+            "x": 4,
+            "y": 11
+          },
+          "hiddenSeries": false,
+          "id": 39,
+          "interval": "10",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "Data",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:43",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:39",
+                  "field": "mysql.status.innodb.buffer_pool.pages.data",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:40",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Dirty",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:49",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:45",
+                  "field": "mysql.status.innodb.buffer_pool.pages.dirty",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:46",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Flushed",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:55",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:51",
+                  "field": "mysql.status.innodb.buffer_pool.pages.flushed",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:52",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "C",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Free",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:61",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:57",
+                  "field": "mysql.status.innodb.buffer_pool.pages.free",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:58",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "D",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Latched",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:67",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:63",
+                  "field": "mysql.status.innodb.buffer_pool.pages.latched",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:64",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "E",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Misc",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:73",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:69",
+                  "field": "mysql.status.innodb.buffer_pool.pages.misc",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:70",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "F",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "InnoDB.BufferPool Pages",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 10,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 9,
+            "y": 11
+          },
+          "hiddenSeries": false,
+          "id": 13,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "Deleted",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:628",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:624",
+                  "field": "mysql.status.innodb.rows.deleted",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:625",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Inserted",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:634",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:630",
+                  "field": "mysql.status.innodb.rows.inserted",
+                  "hide": true,
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:631",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Reads",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:640",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:636",
+                  "field": "mysql.status.innodb.rows.reads",
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:637",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "C",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Updates",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:646",
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "$$hashKey": "object:642",
+                  "field": "mysql.status.innodb.rows.updated",
+                  "id": "1",
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:643",
+                  "field": "1",
+                  "id": "2",
+                  "pipelineAgg": "1",
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "D",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "reads",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:716",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:714",
+                  "field": "mysql.status.innodb.rows.reads",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:732",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "E",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "updated",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:716",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:714",
+                  "field": "mysql.status.innodb.rows.updated",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:732",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "F",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "inserted",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:716",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:714",
+                  "field": "mysql.status.innodb.rows.inserted",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:732",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "G",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "deleted",
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:716",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:714",
+                  "field": "mysql.status.innodb.rows.del",
+                  "hide": true,
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                },
+                {
+                  "$$hashKey": "object:732",
+                  "field": "1",
+                  "id": "3",
+                  "meta": {},
+                  "pipelineAgg": "1",
+                  "settings": {},
+                  "type": "derivative"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "H",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "InnoDB.rows Read",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:56",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:57",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 17,
+            "y": 11
+          },
+          "id": 14,
+          "options": {
+            "displayLabels": [],
+            "legend": {
+              "displayMode": "list",
+              "placement": "right",
+              "values": []
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {}
+          },
+          "pluginVersion": "7.5.11",
+          "targets": [
+            {
+              "alias": "Deleted",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "mysql.status.innodb.rows.deleted",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Inserted",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.innodb.rows.inserted",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "B",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Reads",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": true,
+              "metrics": [
+                {
+                  "field": "mysql.status.innodb.rows.reads",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "C",
+              "timeField": "@timestamp"
+            },
+            {
+              "alias": "Updates",
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "1",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": "0",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "mysql.status.innodb.rows.updated",
+                  "id": "1",
+                  "type": "avg"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "D",
+              "timeField": "@timestamp"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "InnoDB.rows",
+          "type": "piechart"
+        }
+      ],
+      "title": "InnoDB",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 23,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "decimals": 0,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 10,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 52,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:175",
+                  "fake": true,
+                  "field": "sql.metrics.string.user",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": 0,
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "$$hashKey": "object:41",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "30s",
+                    "min_doc_count": 0,
+                    "offset": "10s",
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:39",
+                  "field": "select field",
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname AND sql.metrics.string.db: $database NOT sql.metrics.string.command: Sleep",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "by User",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:248",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:249",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "decimals": 0,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 10,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 17
+          },
+          "hiddenSeries": false,
+          "id": 56,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:175",
+                  "fake": true,
+                  "field": "sql.metrics.string.info",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": 0,
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "$$hashKey": "object:41",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "30s",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:39",
+                  "field": "select field",
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname AND sql.metrics.string.user: /[a-z]*/ AND sql.metrics.string.db: $database AND NOT sql.metrics.string.command: Sleep",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Instance Time by Query",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:248",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:249",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "decimals": 0,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "fill": 10,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 25
+          },
+          "hiddenSeries": false,
+          "id": 57,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:1118",
+                  "fake": true,
+                  "field": "sql.metrics.string.info",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": 0,
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "$$hashKey": "object:41",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "$$hashKey": "object:39",
+                  "field": "sql.metrics.numeric.memory_used",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "sum"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory by query",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:248",
+              "decimals": 0,
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:249",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Instance Time",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 47,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": null,
+                "filterable": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "database"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 87
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "user"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 72
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 103
+                  },
+                  {
+                    "id": "unit",
+                    "value": "ms"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "state"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 149
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "command"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "examined rows"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 124
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "host"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 235
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "@timestamp"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 164
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 24,
+            "x": 0,
+            "y": 13
+          },
+          "id": 49,
+          "options": {
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "@timestamp"
+              }
+            ]
+          },
+          "pluginVersion": "7.5.11",
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "$$hashKey": "object:238",
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "$$hashKey": "object:236",
+                  "field": "select field",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "logs"
+                }
+              ],
+              "query": "fields.mariadb.alias: $hostname AND sql.metrics.string.user: /[a-z]*/ AND sql.metrics.string.db: $database AND NOT sql.metrics.string.command: Sleep",
+              "refId": "B",
+              "timeField": "@timestamp"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "User Sessions",
+          "transformations": [
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "pattern": "sql.*|@timestamp"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "sql.driver": true,
+                  "sql.metrics.numeric.conn_id": true,
+                  "sql.metrics.numeric.examined_rows": false,
+                  "sql.metrics.numeric.max_memory_used": true,
+                  "sql.metrics.numeric.max_stage": true,
+                  "sql.metrics.numeric.memory_used": true,
+                  "sql.metrics.numeric.progress": true,
+                  "sql.metrics.numeric.query_id": true,
+                  "sql.metrics.numeric.stage": true,
+                  "sql.metrics.numeric.tid": true,
+                  "sql.metrics.numeric.time": true,
+                  "sql.metrics.numeric.value": true,
+                  "sql.metrics.string.current_statement": true,
+                  "sql.metrics.string.info": false,
+                  "sql.metrics.string.info_binary": true,
+                  "sql.metrics.string.variable_name": true,
+                  "sql.query": true
+                },
+                "indexByName": {
+                  "@timestamp": 0,
+                  "sql.driver": 5,
+                  "sql.metrics.numeric.examined_rows": 6,
+                  "sql.metrics.numeric.id": 1,
+                  "sql.metrics.numeric.max_memory_used": 7,
+                  "sql.metrics.numeric.max_stage": 8,
+                  "sql.metrics.numeric.memory_used": 9,
+                  "sql.metrics.numeric.progress": 10,
+                  "sql.metrics.numeric.query_id": 11,
+                  "sql.metrics.numeric.stage": 12,
+                  "sql.metrics.numeric.tid": 13,
+                  "sql.metrics.numeric.time": 14,
+                  "sql.metrics.numeric.time_ms": 15,
+                  "sql.metrics.string.command": 16,
+                  "sql.metrics.string.db": 2,
+                  "sql.metrics.string.host": 4,
+                  "sql.metrics.string.info": 18,
+                  "sql.metrics.string.info_binary": 19,
+                  "sql.metrics.string.state": 17,
+                  "sql.metrics.string.user": 3,
+                  "sql.query": 20
+                },
+                "renameByName": {
+                  "@timestamp": "@timestamp",
+                  "sql.driver": "",
+                  "sql.metrics.numeric.examined_rows": "examined rows",
+                  "sql.metrics.numeric.id": "id",
+                  "sql.metrics.numeric.time_ms": "time",
+                  "sql.metrics.numeric.value": "",
+                  "sql.metrics.string.command": "command",
+                  "sql.metrics.string.db": "database",
+                  "sql.metrics.string.host": "host",
+                  "sql.metrics.string.info": "Statement",
+                  "sql.metrics.string.info_binary": "",
+                  "sql.metrics.string.state": "state",
+                  "sql.metrics.string.user": "user",
+                  "sql.metrics.string.variable_name": "",
+                  "sql.query": "query"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "ProcessList",
+      "type": "row"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_ELASTICSEARCH}",
+        "definition": "{\"find\": \"terms\", \"field\": \"fields.mariadb.env\" }",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "env",
+        "multi": false,
+        "name": "env",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"fields.mariadb.env\" }",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_ELASTICSEARCH}",
+        "definition": "{\"find\": \"terms\", \"field\": \"fields.mariadb.alias\",\"query\": \"fields.mariadb.env: $env\"}",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "hostname",
+        "multi": false,
+        "name": "hostname",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"fields.mariadb.alias\",\"query\": \"fields.mariadb.env: $env\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_ELASTICSEARCH}",
+        "definition": "{\"find\": \"terms\", \"field\": \"sql.metrics.string.db\",\"query\": \"fields.mariadb.alias: $hostname\"}",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "database",
+        "multi": true,
+        "name": "database",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"sql.metrics.string.db\",\"query\": \"fields.mariadb.alias: $hostname\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "MariaDB healthcheck",
+  "uid": "6hywJs-nkoo",
+  "version": 5
+}

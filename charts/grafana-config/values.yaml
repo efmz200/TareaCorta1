@@ -5,3 +5,19 @@ dashboards:
     name: elasticsearch
     file: elasticsearch.json
     enable: true
+  maria:
+    name: maria
+    file: maria.json
+    enable: true
+  mariagalera:
+    name: mariagalera
+    file: mariagalera.json
+    enable: true
+  mongo:
+    name: mongo
+    file: mongo.json
+    enable: true
+  postgres:
+    name: postgres
+    file: postgres.json
+    enable: true
