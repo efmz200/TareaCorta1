@@ -2,7 +2,11 @@ mongodb:
   enabled: false
 postgresql-ha:
   enabled: false
+postgresql:
+  enabled: false
 mariadb-galera:
+  enabled: false
+mariadb:
   enabled: false
 elastic:
   enabled: true

@@ -29,10 +29,18 @@ dependencies:
     version: "13.6.7"
     repository: https://charts.bitnami.com/bitnami
     condition: mongodb.enabled
+  - name: postgresql
+    version: "11.1.2"
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
   - name: postgresql-ha
     version: "11.1.2"
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql-ha.enabled
+  - name: mariadb
+    version: "11.4.6"
+    repository: https://charts.bitnami.com/bitnami
+    condition: mariadb.enabled
   - name: mariadb-galera
     version: "7.4.14"
     repository: https://charts.bitnami.com/bitnami
