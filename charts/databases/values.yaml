@@ -1,13 +1,33 @@
 mongodb:
   enabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
+
 postgresql-ha:
   enabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
+
 postgresql:
   enabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
+
 mariadb-galera:
   enabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
+
 mariadb:
   enabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
+      
 elastic:
   enabled: true
   version: 8.6.1
