@@ -1,5 +1,5 @@
 mongodb:
-  enabled: false
+  enabled: true
   metrics:
     serviceMonitor:
       enabled: true
@@ -27,7 +27,7 @@ mariadb:
   metrics:
     serviceMonitor:
       enabled: true
-      
+
 elastic:
   enabled: true
   version: 8.6.1
