@@ -1,0 +1,14 @@
+enablePostgreSQL: true
+
+postgresql:
+  volumePermissions:
+    enabled: true
+  auth:
+    database: test-db
+    postgresPassword: "password"
+    username: "user"
+    password: "password"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
