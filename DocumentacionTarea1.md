@@ -2,7 +2,6 @@
 ### **Tarea Corta #1** – Observability
 ### Jennifer Alvarado Brenes – 2020124171
 ### Luis Diego Delgado Muñoz – carnet
-### Esteven Fernandez Hernandez – carnet
 ### Erick Madrigal Zavala – 2018146983
 ### David Suárez Acosta – 2020038304
 
@@ -35,6 +34,8 @@ helm install database database --dry-run
  
 Una vez teniendo instaladas las bases de datos que se van a utilizar y las herramientas para monitorearlas, proseguimos con Grafana.
 
+Para su funcionamiento, es necesario dirigirse  a la carpeta de grafana-config, y luego de esa a la de dashboards. Luego, en el archivo value.yaml se deben agregar en el "file:" para cada base, el nombre del archivo de su respectivo dashboard.
+
 **Añadiendo los dashboard de las bases de datos**  
   
 Para este paso vamos a buscar en internet "Grafana Dashboards" y visitaremos el primer sitio. En el buscador de dicho sitio, se va a proceder a buscar los dashboards respectivos a cada base de datos que se quiere monitorear.
@@ -51,7 +52,6 @@ En este punto se solicitará un usuario y una contraseña. El usuario correspond
 
 Una vez después de ingresar, nos dirigimos a darshboards y monitoring, y aquí se podrán visualizar los dashboards añadidos. De esta forma se puede ingresar a los dashboards.
 
-Para su funcionamiento, es necesario también dirigirse  a la carpeta de grafana-config, y luego de esa a la de dashboards. Luego, en el archivo value.yaml se deben agregar en el "file:" para cada base, el nombre del archivo de su respectivo dashboard.
 
 ## **Configuración de las herramientas**  
 
