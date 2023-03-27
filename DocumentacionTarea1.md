@@ -2,7 +2,7 @@
 ### **Tarea Corta #1** – Observability
 ### Jennifer Alvarado Brenes – 2020124171
 ### Luis Diego Delgado Muñoz – 2020030408
-### Esteven Fernandez Hernandez – carnet
+### Esteven Fernandez Hernandez – 2016072253
 ### Erick Madrigal Zavala – 2018146983
 ### David Suárez Acosta – 2020038304
 
@@ -89,13 +89,67 @@ Seguido por la contraseña creada previamente.
   
 **MongoDB**  
 
+En primera instancia se debe habilitar el puerto 20017 en el firewall. Posteriormente, a través de la consola SSH a tu servidor y verifica la versión de MongoDB con el comando:
 
-  
+```sh
+mongod --version
+```
+
+A continuación, se debe crear un usuario administrador. Para ellos, se ejecuta una instacnia de MongoShell y se hace en el puerto en el cual está configurado, esto se hace de la siguiente forma:
+
+```sh
+mongo --port 20017
+ 
+use admin
+ 
+db.createUser(
+  {
+    user: "myServerAdmin",
+    pwd: "mipassword",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+);
+```
+Esto se hace cambiando los datos de "user" y "pwd" del código con el usuario y contraseña utilizadas en la tarea.
+
+De esta forma ya queda configurada la herramienta de MongoDB.
+
 **Elasticsearch**  
 
+Primeramente se deben haber instalado una versión de JDK compatible con Elasticsearch, y también se debe haber descargado la versión certificada de RPM de Elasticsearch.
 
+Para instalar Elasticsearch se ejecuta el comando:
+```sh
+rpm -i elasticsearch-<version>.rpm
+```
+
+También se debe verificar que el usuario de Elasticsearch tenga acceso a Java mediante el comando:
+```sh
+sudo –u elasticsearch java –version
+```
+
+Posterior a esto, se actualiza el tamaño de la pila de Elasticsearch predeterminado realizando una modificación de la propiedad ES_HEAP_SIZE en el archivo /etc/sysconfig/elasticsearch. 
+
+Para finalizar se reinicia Elasticsearch mediante el comando:
+
+```sh
+/etc/init.d/elasticsearch restart
+```
   
 **PostgreSQL**  
+
+En primera instancia se debe estar seguro de que esté configurado para iniciar sesión desde localhost. Para esto se abre el archivo pg_hba.conf ubicado en el directorio de configuración y se modifica de esta forma:
+
+```sh
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+```
 
 
   
