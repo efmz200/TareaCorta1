@@ -34,7 +34,6 @@ helm install database database --dry-run
 ## **Configuración de Grafana**
  
 Una vez teniendo instaladas las bases de datos que se van a utilizar y las herramientas para monitorearlas, proseguimos con Grafana.
- 
 
 **Añadiendo los dashboard de las bases de datos**  
   
@@ -45,6 +44,14 @@ Después de un proceso de selección, y posterior a haber realizado la descarga 
 Esta ruta corresponde a la carpeta donde se encuentre la tarea, siguiendo esta dirección: TareaCorta1 -> charts -> grafana-config -> dashboards.
 
 Y en ese punto se guardan todos los archivos .json correspondientes a los dashboards. 
+
+Posterior a esto, en los pods se busca Grafana, y se hace un post foward. Una vez que se despliegue la ventana correspondiente, se debe poner el check de abrir en el browser.
+
+En este punto se solicitará un usuario y una contraseña. El usuario corresponde a "admin", y la contraseña se encuentra en secrets de Grafana.
+
+Una vez después de ingresar, nos dirigimos a darshboards y monitoring, y aquí se podrán visualizar los dashboards añadidos. De esta forma se puede ingresar a los dashboards.
+
+Para su funcionamiento, es necesario también dirigirse  a la carpeta de grafana-config, y luego de esa a la de dashboards. Luego, en el archivo value.yaml se deben agregar en el "file:" para cada base, el nombre del archivo de su respectivo dashboard.
 
 ## **Configuración de las herramientas**  
 
