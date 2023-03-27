@@ -1,7 +1,8 @@
 ### **Base de Datos II (IC4302)** – Semestre 1, 2023
 ### **Tarea Corta #1** – Observability
 ### Jennifer Alvarado Brenes – 2020124171
-### Luis Diego Delgado Muñoz – carnet
+### Luis Diego Delgado Muñoz – 2020030408
+### Esteven Fernandez Hernandez – carnet
 ### Erick Madrigal Zavala – 2018146983
 ### David Suárez Acosta – 2020038304
 
