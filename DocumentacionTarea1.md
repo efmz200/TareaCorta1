@@ -1,29 +1,21 @@
-# **Documentación de la tarea 1**
+### **Base de Datos II (IC4302)** – Semestre 1, 2023
+### **Tarea Corta #1** – Observability
+### Jennifer Alvarado Brenes – 2020124171
+### Luis Diego Delgado Muñoz – carnet
+### Esteven Fernandez Hernandez – carnet
+### Erick Madrigal Zavala – 2018146983
+### David Suárez Acosta – 2020038304
 
-## **Instalación**
+## **Guía de instalación y uso de la tarea**
 
   
 Antes de ejecutar cualquier comando se debe tener instalado en el equipo:
 1. Docker desktop con kubernetes habilitado
 2. Helm
-3. Minikube
-4. Powershell
+3. Powershell
+4. Lens
 
-**Con Minikube**  
-
-Se debe clonar el repo de github: https://github.com/notthatdood/TareaCorta1.
-Luego se abre powershell y se hace un change directory a donde se haya colocado este repo.
-
-#### Instalar las herramientas de monitoreo y bases de datos
-En la configuración de este helm chart solo están habilitadas prometheus y grafana, thanos está deshabilitada para su instalación. Solo se debe configurar el values.yaml de la carpeta monitoring para habilitarlo. Más adelante ejemplifica.  
-
-1.Desde línea de comandos en Windows se debe ejecutar:
-```sh
-./createEverything.ps1
-```  
-**Sin Minikube**  
-
-1.Desde línea de comandos se debe ejecutar:
+1.Desde línea de comandos, se ejecutan:
 ```sh
 helm install monitoring monitoring --dependency-build
 ```  
@@ -35,41 +27,14 @@ helm install monitoring monitoring --dry-run
 ```sh
 helm install database database --dependency-build
 ```  
-3.Para instalar las bases de datos se debe ejecutar el siguiente comando:  
+3.Para instalar las bases de datos se ejecuta el siguiente comando:  
 ```sh
 helm install database database --dry-run
 ```
-## **Configuración de grafana**
-
-Luego de tener instaladas las bases que vamos a utilizar y las herramientas que van a monitorear esa base de datos. Podemos ingresar a grafana.  
-
-1.Nos vamos a la línea de comandos y ejecutamos lo siguiente:
-```sh
- kubectl port-forward svc/monitoring-grafana 8080:3000
-```  
-  
-2.Entramos al navegador e ingresamos a grafana utilizando la dirección:  
-
-http://127.0.0.1:8080
-
-3.Escribimos las credenciales, por defecto será el usuario "admin" y la contraseña será "tarea1", esta contraseña está configurada en el values.yaml del helm chart "monitoring".
-
-![N|Solid](https://i.pinimg.com/564x/59/67/f5/5967f5e69af4fd8c478b30827091462a.jpg)  
-
-4.Nos vamos a la parte de configuración y Data sources  
-
-![N|Solid](https://i.pinimg.com/originals/68/c9/f3/68c9f3724b86c67ea6858e56d9ebf2d2.jpg)  
-
-5.Añadimos el data souces y seguidamente prometheus 
-
-![N|Solid](https://i.pinimg.com/originals/ed/bb/a7/edbba713ff4d5a96e3bf25258d59cb68.jpg)  
-
-![N|Solid](https://i.pinimg.com/originals/04/bc/e6/04bce615e432a85d4e588fe5bf958ebc.jpg)  
-
-5.Indicamos el url de prometheus el cual será: http://monitoring-kube-prometheus-prometheus:9090  y guardamos los cambios. Debe aparecer un mensaje en donde indique que el Data source está funcionando.
-
-![N|Solid](https://i.pinimg.com/originals/81/aa/d7/81aad70ee0eaf0518108d06a3712dbf6.jpg)  
-![N|Solid](https://i.pinimg.com/originals/ee/5a/ef/ee5aefb88578c083f766c07441381145.jpg)  
+## **Configuración de Grafana**
+ 
+Una vez teniendo instaladas las bases de datos que se van a utilizar y las herramientas para monitorearlas, proseguimos con Grafana.
+ 
 
 **Añadiendo los dashboard de las bases de datos**  
   
@@ -133,7 +98,7 @@ Añadimos el user y password para abrir postgresql y habilitamos el service moni
 
 Para realizar las pruebas en Gatling se intentó inicialmente utilizar Flask como intermediario entre las bases de datos y Gatling. Se siguió la guía de la documentación del sitio web oficial de Flask (Flask, 2010) para montar la aplicación de Flask. Se logró montar la aplicación de Flask con normalidad y siguiendo la guía fue muy sencillo, sin embargo no se logró conectar con Gatling para hacer las pruebas de rendimiento a las bases de datos.
 
-Al no poder utilizar Flask como parte de la implementación de gatling se intentó usar Gatling directamente descargando el Gatling Bundle de su página oficial. Se siguió la guía del video publicado por Automatation Step By Step (Pal, 2022).
+Al no poder utilizar Flask como parte de la implementación de Gatling se intentó usar Gatling directamente descargando el Gatling Bundle de su página oficial. Se siguió la guía del video publicado por Automatation Step By Step (Pal, 2022).
 Antes de empezar al proyecto de Gatling se necesita lo siguiente:
 
 - Tener instalado el JDK.
