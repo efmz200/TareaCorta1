@@ -55,6 +55,22 @@ Una vez después de ingresar, nos dirigimos a darshboards y monitoring, y aquí 
 
 ## **Configuración de las herramientas**  
 
+**Kubernetes (kubectl)**
+
+*Instalación*
+
+Para instalar Kubernetes en Windows, primero se debe ejecutar el siguiente comando en Powershell:
+curl.exe -LO "https://dl.k8s.io/release/v1.26.0/bin/windows/amd64/kubectl.exe"
+Una vez instalado, se debe agregar el Path a las System variables como C:\kube
+
+Existe la alternativa de, si se tiene Docker instalado, se puede habilitar la opción “Enable Kubernetes” en las configuraciones de Docket Desktop y esto instalará Kubernetes automáticamente.
+
+*Uso*
+
+El primer paso, una vez que se tiene instalado kubectl, es crear un cluster, para esto se recomienda utilizar la herramienta Minikube el cual es un sistema gratuito que realiza algunas de las configuraciones necesarias para su uso, además de ofrecer herramientas para visualizar el cluster y sus componentes.
+Al tener un cluster creado, existen diferentes comandos útiles que permiten la creación, visualización y edición de deployments (grupos de pods con la misma configuración) por medio de Servicios de Kubernetes y pods (pueden contener a uno o más contenedores).
+
+
 **MariaDB**  
 
 Añadimos el user y password para abrir y que funciones MariaDB y habilitamos el service monitor para las métricas.
