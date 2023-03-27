@@ -27,6 +27,13 @@ mariadb:
   metrics:
     serviceMonitor:
       enabled: true
+  auth:
+    enabled: true
+    username: "admin"
+    rootPassword: "YES"
+    username: "user"
+    password: "password"
+    database: test-db
 
 elastic:
   enabled: true

@@ -1,0 +1,10 @@
+{
+  "simulation": "PruebaOrangeLogin",
+  "simulationId": "pruebaorangelogin-20220916045359546",
+  "start": 1663304041103,
+  "description": "",
+  "scenarios": ["PruebaOrangeLogin"],
+  "assertions": [
+
+  ]
+}
