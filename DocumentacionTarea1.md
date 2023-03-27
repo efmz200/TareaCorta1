@@ -61,7 +61,9 @@ Una vez después de ingresar, nos dirigimos a darshboards y monitoring, y aquí 
 *Instalación*
 
 Para instalar Kubernetes en Windows, primero se debe ejecutar el siguiente comando en Powershell:
+
 curl.exe -LO "https://dl.k8s.io/release/v1.26.0/bin/windows/amd64/kubectl.exe"
+
 Una vez instalado, se debe agregar el Path a las System variables como C:\kube
 
 Existe la alternativa de, si se tiene Docker instalado, se puede habilitar la opción “Enable Kubernetes” en las configuraciones de Docket Desktop y esto instalará Kubernetes automáticamente.
@@ -74,6 +76,15 @@ Al tener un cluster creado, existen diferentes comandos útiles que permiten la 
 
 **MariaDB**  
 
+*Instalación*
+
+MariaDB se puede instalar desde la página oficial, llamada MariaDB Foundation. En el proceso instalación, se necesita crear una contraseña con la que se iniciará sessión como root user en la base de datos, para el resto de configuraciones no hace falta realizar cambios y se puede instalar con los defaults.
+
+Una vez hecha la instalación, se puede conectar a la base de datos ingresando desde la terminal a la carpeta *bin* ejecutando el comando:
+
+mysql -u root -p
+
+Seguido por la contraseña creada previamente.
 
   
 **MongoDB**  
