@@ -2,7 +2,7 @@
 ### **Tarea Corta #1** – Observability
 ### Jennifer Alvarado Brenes – 2020124171
 ### Luis Diego Delgado Muñoz – 2020030408
-### Esteven Fernández Hernández - 2016072253
+### Esteven Fernandez Hernandez – 2016072253
 ### Erick Madrigal Zavala – 2018146983
 ### David Suárez Acosta – 2020038304
 
@@ -144,7 +144,7 @@ host    all             all             ::1/128                 md5
   
 ## **Pruebas de Gatling**
 
-Para realizar las pruebas en Gatling se intentó inicialmente utilizar Flask como intermediario entre las bases de datos y Gatling. Se siguió la guía de la documentación del sitio web oficial de Flask (Flask, 2010) para montar la aplicación de Flask. Se logró montar la aplicación de Flask con normalidad y siguiendo la guía fue muy sencillo, sin embargo no se logró conectar con Gatling para hacer las pruebas de rendimiento a las bases de datos.
+Para realizar las pruebas en Gatling se intentó inicialmente utilizar Flask como intermediario entre las bases de datos y Gatling. Se siguió la guía de la documentación del sitio web oficial de Flask (Flask, 2010) para montar la aplicación de Flask. Se logró montar la aplicación de Flask con normalidad y siguiendo la guía fue muy sencillo, sin embargo a varios integrantes el módulo de Flask aparecia sin instalar a pesar de haber hecho el "pip install".
 
 Al no poder utilizar Flask como parte de la implementación de gatling se intentó usar Gatling directamente descargando el Gatling Bundle de su página oficial. Se siguió la guía del video publicado por Automatation Step By Step (Pal, 2022).
 Antes de empezar al proyecto de Gatling se necesita lo siguiente:
@@ -154,11 +154,32 @@ Antes de empezar al proyecto de Gatling se necesita lo siguiente:
 - Instalar el lenguaje de programación Scala.
 - Descargar Maven para crear el proyecto.
 
-A la hora de realizar pruebas de gatling por si solo, se utilizó el sitio web demo de Orange HRM (https://opensource-demo.orangehrmlive.com/web/index.php/auth/login). Al estar dentro de este sitio web, se presiona F12 y se va a la sección que dice "Red". En la sección de Red se presiona el botón de grabar y se comienzan a ingresar datos en la página demo.
-Después de grabar las acciones, se seleccióna la opción de guardar los datos como un archivo .HAR y este se ingresa a la interfaz que se despliega al correr el archivo recorder.bat del Gatling Bundle. Al ingresar el archivo gatling genera un link en el que se pueden observar los gráficos de las pruebas realizadas, además de crear un script para correr las pruebas el cual se puede editar también para alterar la cantidad de usuarios que "ingresarían a la base" en la simulación de Gatling.
+A la hora de realizar pruebas de gatling por si solo, se utilizó el sitio web demo de Orange HRM (https://opensource-demo.orangehrmlive.com/web/index.php/auth/login). Al estar dentro de este sitio web, se presiona F12 o se abren las herramientas de desarrollador y se va a la sección que dice "Red" o "Network". En la sección de Red se presiona el botón de grabar y se comienzan a ingresar datos en la página demo.
 
-La prueba con el sitio web demo y sin conecciones se realizaron con éxito, sin embargo no se logró enlazar Gatling directamente con los pods de las bases de datos.
- 
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image1.png?raw=true)
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image2.png?raw=true)
+
+Después de grabar las acciones, se seleccióna la opción de guardar los datos como un archivo .HAR y este se ingresa a la interfaz que se despliega al correr el archivo recorder.bat del Gatling Bundle.
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image3.png?raw=true)
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image4.png?raw=true)
+
+Al ingresar el archivo gatling genera un link en el que se pueden observar los gráficos de las pruebas realizadas, además de crear un script para correr las pruebas el cual se puede editar también para alterar la cantidad de usuarios que "ingresarían a la base" en la simulación de Gatling. En este caso haremos las pruebas simulando 10 usuarios simultaneamente. 
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image5.png?raw=true)
+
+La prueba con el sitio web demo y sin conecciones se realizaron con éxito, sin embargo no se logró enlazar Gatling directamente con los pods de las bases de datos. Estos fueron los reportes generados:
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image6.png?raw=true)
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image7.png?raw=true)
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image8.png?raw=true)
+
+![](https://github.com/efmz200/TareaCorta1/blob/main/Imagenes/image9.png?raw=true)
+
 ## **Conclusiones**  
 
 Esta tarea fue de vital importancia para el aprendizaje y práctica de la utilización de herramientas como Docker Desktop, Kubernets, Lens, Helm, Grafana, Gatling, etc. 

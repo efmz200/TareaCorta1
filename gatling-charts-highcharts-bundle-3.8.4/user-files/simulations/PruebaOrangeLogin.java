@@ -86,6 +86,6 @@ public class PruebaOrangeLogin extends Simulation {
           )
       );
 
-	  setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
+	  setUp(scn.injectOpen(atOnceUsers(10))).protocols(httpProtocol);
   }
 }
